@@ -4,15 +4,21 @@
     border: 0;
 }
 
-.header {
+.head {
 display: flex;
 justify-content: center;
 background-color: skyblue;
 padding: 10px;
 }
 
-.header h1 {
+.head h1 {
     font-size: 50px;
+}
+
+#master {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 #leftSideInfo {
@@ -20,10 +26,7 @@ display: flex;
 flex-direction: column;
 column-count: auto;
 align-items: flex-start;
-justify-content: space-between;
 padding: 5px;
-width: 100%;
-height: 100%;
 }
 
 #mainInfo {
@@ -31,7 +34,6 @@ height: 100%;
 flex-direction: column;
 column-count: auto;
 align-items:center;
-justify-content: space-between;
 padding: 5px;
 width: 100%;
 height: 100%;
