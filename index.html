@@ -15,11 +15,17 @@
         <container class="masterContainer" id="master"> 
 
             <container class="onside" id="leftSideInfo">    
+                
                 <div class="card" id="citySearchSection">
                     <div class="card-header" id="citySearchHeader">Search For City:</div>
                     <div class="card-body" id="citySearchBody">
-                        <input id="citySearchBar" type="text" placeholder="City Name, State">
-                        <button id="citySearchBtn">Go</button>
+                        
+                        <form id="searchForm"> 
+                         <label for="cityName">City Name</label>
+                         <input type="text" class="form-input" name="cityName" placeholder="Enter City Name"/>
+                         <button id="citySearchBtn">Go</button>
+                        </form> 
+
                     </div>
                     
                 </div>
@@ -28,6 +34,7 @@
                     <div class="card-header" id="historyHeader">Previous Searches:</div>
                     <div class="card-body" id="historyBody">Previously searched cities go here</div>
                 </div>
+
             </container>
     
             <container class="main" id="mainInfo">
@@ -65,7 +72,8 @@
                 </div>
             </container>
 
-        </container>   
+        </container>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>       
     <script src="Assets/script.js" async defer></script>
     </body>
 </html>
