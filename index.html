@@ -22,7 +22,7 @@
                         
                         <form id="searchForm"> 
                          <label for="cityName">City Name</label>
-                         <input type="text" class="form-input" name="cityName" placeholder="Enter City Name"/>
+                         <input id="searchBar" type="text" class="form-input" name="cityName" placeholder="Enter City Name"/>
                          <button id="citySearchBtn">Go</button>
                         </form> 
 
@@ -39,11 +39,16 @@
     
             <container class="main" id="mainInfo">
                 <div class="card" id="mainWeatherSection">
-                    <div class="card-header" id="mainWeatherHeader">Dispaly current searched city NAME here</div>
-                    <div class="card-body" id="mainWeatherBody">info for city here.</div>  
+                    <div class="card-header" id="mainWeatherHeader">City Name</div>
+                    <div class="card-body" id="tempText">Temperature:</div>
+                    <div class="card-body" id="humidityText">Humidity:</div>
+                    <div class="card-body" id="windSpeedText">Wind Speed:</div>
+                    <div class="card-body" id="uvIndexText">UV Index:</div>  
                 </div>
 
                 <div class="card" id="weekForecast">
+                    <h2>5-Day Forecast</h2>
+
                     <div class="card" id="cOne">
                         <div class="card-header">Day 1</div>
                         <div class="card-body">Info here</div>

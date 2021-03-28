@@ -68,7 +68,12 @@ height: 100%;
 border: black 2px solid;
 }
 
-#citySearchHeader, #historyHeader, #mainWeatherHeader {
+#mainWeatherHeader {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+#citySearchHeader, #historyHeader {
     font-weight: bold;
     font-size: 20px;
 }
