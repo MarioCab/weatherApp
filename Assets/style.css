@@ -12,6 +12,10 @@ padding: 10px;
 border: solid black 2px;
 }
 
+.card-header {
+    background-color: skyblue;
+}
+
 .head h1 {
     font-size: 50px;
 }
@@ -42,8 +46,11 @@ flex-direction: column;
 column-count: auto;
 align-items: flex-start;
 padding: 5px;
-border: black 2px solid;
 
+}
+
+#citySearchSection, #historySection, #mainWeatherSection, #weekForecast, #cOne, #cTwo, #cThree, #cFour, #cFive {
+    border: black 2px solid;
 }
 
 #citySearchSection, #historySection {
@@ -92,4 +99,28 @@ border: black 2px solid;
 .card-header {
     justify-content: center;
     text-align: center;
+}
+
+.lowUV {
+background-color: green;
+}
+
+.modUV {
+    background-color: yellow;
+}
+
+.highUV {
+    background-color: orange;
+}
+
+.veryHighUV {
+    background-color: red;
+}
+
+.extremeUV {
+    background-color: purple;
+}
+
+.hide {
+    display: none;
 }
