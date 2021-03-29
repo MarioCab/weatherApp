@@ -89,8 +89,9 @@ border: black 2px solid;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 10%;
+    margin: 5%;
 }
+
 
 #weekForecast .card {
     margin: 3%;
