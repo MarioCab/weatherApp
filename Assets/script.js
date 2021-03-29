@@ -9,9 +9,7 @@ var oneCallFirst = 'https://api.openweathermap.org/data/2.5/onecall?lat='
 var oneCallMid = '&lon='
 var currentCityName = $('#mainWeatherHeader');
 var d = new Date();
-var tomorrowDate = new Date(d)
 var date = d.toLocaleDateString();
-var cityNameDate = cityInputEl.val() + " " + '(' + date + ')'
 
 // Button to start everything
 
@@ -54,7 +52,17 @@ function pullWeatherData(){
             return response.json();
         })
         .then(function(data) {
-            console.log(data);
+
+            for(var i=1; i<6; i++){
+                console.log(data.daily[i])
+                var futureDate = moment.unix(data.daily[i].dt).format('M/D/YYYY');
+                var card = $('<div>').addClass('card m-1');
+                var cardBody = $('<div>').addClass('card-body');
+                var cardHeader = $('<div>').addClass('card-header').text(futureDate);
+                var icon = $('<img>').attr('src', `http://openweathermap.org/img/w/${data.daily[i].weather[0].icon}.png`)
+                $('#weekForecast').append(card.append(cardBody.append(cardHeader.append(icon))));
+
+            }
 
             const uvIndex = data.current.uvi;
 
@@ -89,10 +97,5 @@ function pullWeatherData(){
 //Function to set the time and current city
 
 function applyNameAndTime(){
-    document.getElementById('mainWeatherHeader').innerHTML = cityNameDate;
-    document.getElementById('cOne').children[0].innerHTML = tomorrowDate.setDate(tomorrowDate.getDate() + 1).toLocaleString;
-    document.getElementById('cTwo').children[0].innerHTML = "test test";
-    document.getElementById('cThree').children[0].innerHTML = "test test";
-    document.getElementById('cFour').children[0].innerHTML = "test test";
-    document.getElementById('cFive').children[0].innerHTML = "test test";
+    document.getElementById('mainWeatherHeader').innerHTML = cityInputEl.val() + " " + '(' + date + ')';
 }
