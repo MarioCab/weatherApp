@@ -4,8 +4,9 @@ var formEl = $('#searchForm');
 var cityInputEl = $('input[name="cityName"]');
 var searchBtn = document.getElementById('citySearchBtn');
 var currentWeatherFirst = 'http://api.openweathermap.org/data/2.5/weather?q='
-var allWeatherLast = '&appid=06ac0e5e9aecb8b74a0ca04ef150a8a4&units=imperial'
-var futureWeatherFirst = 'http://api.openweathermap.org/data/2.5/forecast?q='
+var apiID = '&appid=06ac0e5e9aecb8b74a0ca04ef150a8a4&units=imperial'
+var oneCallFirst = 'https://api.openweathermap.org/data/2.5/onecall?lat='
+var oneCallMid = '&lon='
 var currentCityName = $('#mainWeatherHeader');
 var d = new Date();
 var date = d.toLocaleDateString();
@@ -19,57 +20,60 @@ searchBtn.addEventListener("click", handleFormSubmit);
 function handleFormSubmit(event) {
 
 event.preventDefault();
-pullCurrentData();
-pullFutureData();
+pullWeatherData();
 applyNameAndTime();
 }
 
 // Pull Current API Data
 
-function pullCurrentData(){
-    fetch(currentWeatherFirst + cityInputEl.val() + allWeatherLast)
+function pullWeatherData(){
+
+    fetch(currentWeatherFirst + cityInputEl.val() + apiID)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
         console.log(data);
-    
+
         const temp = data.main.temp;
         const humidity = data.main.humidity;
         const windSpeed = data.wind.speed;
+        const latitude = data.coord.lat;
+        const longitude = data.coord.lon;
 
-        console.log(temp);
-        console.log(humidity);
-        console.log(windSpeed);
+        fetch(oneCallFirst + latitude + oneCallMid + longitude + apiID)
+        .then(function (response){
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+        })
 
-    function insertDataToCurrent(){
-        document.getElementById('tempText').innerHTML = "Temperature: " + temp + " F";
-        document.getElementById('humidityText').innerHTML = "Humidity: " + humidity;
-        document.getElementById('windSpeedText').innerHTML = "Wind Speeds: " + windSpeed + " mph";
+        function insertDataToCurrent(){
+            document.getElementById('tempText').innerHTML = "Temperature: " + temp + " F";
+            document.getElementById('humidityText').innerHTML = "Humidity: " + humidity;
+            document.getElementById('windSpeedText').innerHTML = "Wind Speeds: " + windSpeed + " mph";
+            document.getElementById('uvIndexText').innerHTML = "UV Index: " + uvIndex;
         }
-
         insertDataToCurrent();
-        
-    })}
-
-
-
-
-
-
-// Pull future API Data
-
-function pullFutureData(){
-
-fetch(futureWeatherFirst + cityInputEl.val() + allWeatherLast)
-.then(Response => Response.json())
-.then(data => console.log(data));
+    })
 }
+
+
+
+
+
+
+
+
+
+
+        // const uvIndex = 
+
+
 
 //Function to set the time and current city
 
 function applyNameAndTime(){
     document.getElementById('mainWeatherHeader').innerHTML = cityInputEl.val() + " " + '(' + date + ')';
-    
 }
-
