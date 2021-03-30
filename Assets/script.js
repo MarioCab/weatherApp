@@ -12,9 +12,16 @@ var d = new Date();
 var date = d.toLocaleDateString();
 var forecastCardsDiv = document.getElementById("weekForecast");
 var histBody = document.getElementById("historyBody");
+var clearBtn = document.getElementById("clearBtn");
 // Button to start everything
 
 searchBtn.addEventListener("click", handleFormSubmit);
+clearBtn.addEventListener("click", function () {
+  console.log("clear button clicked");
+  localStorage.removeItem("Search History");
+  //   window.location.reload();
+  histBody.innerHTML = ``;
+});
 
 //Function to pull all API and set basic data
 
@@ -25,16 +32,19 @@ function handleFormSubmit(event) {
 }
 
 //populate search history from ls
+function populateSearchHistory() {
+  histBody.innerHTML = ``;
+  if (localStorage.getItem("Search History")) {
+    var historyFromStorage = JSON.parse(localStorage.getItem("Search History"));
 
-if (localStorage.getItem("Search History")) {
-  var historyFromStorage = JSON.parse(localStorage.getItem("Search History"));
-
-  for (let i = 0; i < historyFromStorage.length; i++) {
-    var histItem = document.createElement("p");
-    histItem.textContent = historyFromStorage[i];
-    histBody.prepend(histItem);
+    for (let i = 0; i < historyFromStorage.length; i++) {
+      var histItem = document.createElement("p");
+      histItem.textContent = historyFromStorage[i];
+      histBody.prepend(histItem);
+    }
   }
 }
+populateSearchHistory();
 // Pull All API Data
 
 function pullWeatherData() {
@@ -62,6 +72,7 @@ function pullWeatherData() {
           JSON.stringify(historyFromStorage)
         );
       }
+      populateSearchHistory();
 
       const temp = data.main.temp;
       const humidity = data.main.humidity;
