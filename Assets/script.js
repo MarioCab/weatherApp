@@ -11,6 +11,7 @@ var currentCityName = $("#mainWeatherHeader");
 var d = new Date();
 var date = d.toLocaleDateString();
 var forecastCardsDiv = document.getElementById("weekForecast");
+var histBody = document.getElementById("historyBody");
 // Button to start everything
 
 searchBtn.addEventListener("click", handleFormSubmit);
@@ -23,6 +24,17 @@ function handleFormSubmit(event) {
   applyNameAndTime();
 }
 
+//populate search history from ls
+
+if (localStorage.getItem("Search History")) {
+  var historyFromStorage = JSON.parse(localStorage.getItem("Search History"));
+
+  for (let i = 0; i < historyFromStorage.length; i++) {
+    var histItem = document.createElement("p");
+    histItem.textContent = historyFromStorage[i];
+    histBody.prepend(histItem);
+  }
+}
 // Pull All API Data
 
 function pullWeatherData() {
