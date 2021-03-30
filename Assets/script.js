@@ -10,7 +10,7 @@ var oneCallMid = "&lon=";
 var currentCityName = $("#mainWeatherHeader");
 var d = new Date();
 var date = d.toLocaleDateString();
-
+var forecastCardsDiv = document.getElementById("weekForecast");
 // Button to start everything
 
 searchBtn.addEventListener("click", handleFormSubmit);
@@ -34,6 +34,22 @@ function pullWeatherData() {
     })
     .then(function (data) {
       console.log(data);
+
+      if (!localStorage.getItem("Search History")) {
+        var searchHistory = [];
+        searchHistory.push(data.name);
+        localStorage.setItem("Search History", JSON.stringify(searchHistory));
+      } else {
+        var historyFromStorage = JSON.parse(
+          localStorage.getItem("Search History")
+        );
+
+        historyFromStorage.push(data.name);
+        localStorage.setItem(
+          "Search History",
+          JSON.stringify(historyFromStorage)
+        );
+      }
 
       const temp = data.main.temp;
       const humidity = data.main.humidity;
@@ -64,8 +80,7 @@ function pullWeatherData() {
           return response.json();
         })
         .then(function (data) {
-          var forecastCardsDiv = document.getElementById("weekForecast");
-
+          forecastCardsDiv.innerHTML = ``;
           for (var i = 1; i < 6; i++) {
             console.log(data.daily[i]);
             // var icon = $("<img>").attr(
