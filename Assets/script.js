@@ -101,6 +101,7 @@ function pullWeatherData(){
 }
 
 
+
 //Function to set the time and current city
 
 function applyNameAndTime(){
