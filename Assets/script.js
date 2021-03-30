@@ -4,7 +4,7 @@ var formEl = $('#searchForm');
 var cityInputEl = $('input[name="cityName"]');
 var searchBtn = document.getElementById('citySearchBtn');
 var currentWeatherFirst = 'http://api.openweathermap.org/data/2.5/weather?q='
-var apiID = '&appid=06ac0e5e9aecb8b74a0ca04ef150a8a4&units=imperial'
+var apiID = '06ac0e5e9aecb8b74a0ca04ef150a8a4'
 var oneCallFirst = 'https://api.openweathermap.org/data/2.5/onecall?lat='
 var oneCallMid = '&lon='
 var currentCityName = $('#mainWeatherHeader');
@@ -27,8 +27,9 @@ applyNameAndTime();
 // Pull All API Data
 
 function pullWeatherData(){
+var currentWeatherAPI = `http://api.openweathermap.org/data/2.5/weather?q=${cityInputEl.val()}&appid=${apiID}&units=imperial`
 
-    fetch(currentWeatherFirst + cityInputEl.val() + apiID)
+    fetch(currentWeatherAPI)
     .then(function (response) {
         return response.json();
     })
@@ -51,9 +52,12 @@ function pullWeatherData(){
             document.getElementById('windSpeedText').innerHTML = "Wind Speeds: " + windSpeed + " mph";
         }
 
-        fetch(oneCallFirst + latitude + oneCallMid + longitude + apiID)
+        var oneCallURL=`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiID}`
+
+        fetch(oneCallURL)
         .then(function (response){
-            return response.json();
+           return response.json();
+          
         })
         .then(function(data) {
 
