@@ -3,7 +3,7 @@
 var formEl = $('#searchForm');
 var cityInputEl = $('input[name="cityName"]');
 var searchBtn = document.getElementById('citySearchBtn');
-var currentWeatherFirst = 'https://api.openweathermap.org/data/2.5/weather?q='
+var currentWeatherFirst = 'http://api.openweathermap.org/data/2.5/weather?q='
 var apiID = '&appid=06ac0e5e9aecb8b74a0ca04ef150a8a4&units=imperial'
 var oneCallFirst = 'https://api.openweathermap.org/data/2.5/onecall?lat='
 var oneCallMid = '&lon='
@@ -40,10 +40,10 @@ function pullWeatherData(){
         const windSpeed = data.wind.speed;
         const latitude = data.coord.lat;
         const longitude = data.coord.lon;
-        var icon = $('<img>').attr('src', `http://openweathermap.org/img/w/${data.weather[0].icon}.png`);
-    
-        $('#mainWeatherHeader').append(icon);
 
+        var icon = $('<img>').attr('src', `http://openweathermap.org/img/w/${data.weather[0].icon}.png`);
+
+        $('#mainWeatherHeader').append(icon);
         
         function insertDataToCurrent(){
             document.getElementById('tempText').innerHTML = "Temperature: " + temp + " F";
@@ -59,13 +59,15 @@ function pullWeatherData(){
 
             for(var i=1; i<6; i++){
                 console.log(data.daily[i])
+                var cardTextMin = data.daily[i].temp.min;
+                var cardTextMax = data.daily[i].temp.max;
                 var futureDate = moment.unix(data.daily[i].dt).format('M/D/YYYY');
-                var card = $('<div>').addClass('card');
-                var cardBody = $('<div>').addClass('card-body');
+                var card = $('<div>').addClass('card m-1');
+                var cardBody = $('<div>').addClass('card-body').text('Min: ' + cardTextMin + "/" + 'Max:' + cardTextMax);
                 var cardHeader = $('<div>').addClass('card-header').text(futureDate);
                 var icon = $('<img>').attr('src', `http://openweathermap.org/img/w/${data.daily[i].weather[0].icon}.png`)
-                $('#weekForecast').append(cardHeader);
-                $('#weekForecast').append(card.append(cardBody.append(icon)));
+                $('#weekForecast').append(card.append(cardBody.append(cardHeader.append(icon))));
+                
 
             }
 
